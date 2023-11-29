@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -8,13 +8,18 @@ function App() {
     "Did you hear about the mathematician who’s afraid of negative numbers? He'll stop at nothing to avoid them!"
   ];
 
+  const [currentJokeIndex, setCurrentJokeIndex] = useState(0);
+
+  const showNextJoke = () => {
+    setCurrentJokeIndex((prevIndex) => (prevIndex + 1) % jokes.length);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Jokes</h1>
-        <ul>
-          {jokes.map(joke => <li key={joke}>{joke}</li>)}
-        </ul>
+        <p>{jokes[currentJokeIndex]}</p>
+        <button onClick={showNextJoke}>Next Joke</button>
       </header>
     </div>
   );
